@@ -37,7 +37,7 @@ prompt = jam_room.compose(
 ## Installation
 
 ```bash
-pip install jam_ai --upgrade
+pip install jam-ai --upgrade
 ```
 You need to use Pip to install jam. Conda package is currently unavailable.
 

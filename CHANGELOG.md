@@ -1,6 +1,6 @@
 # Change Logs
 
-### v0.1.3 - First Push (23 June 2023)
+### v0.1.5 - Fix Dependency (23 June 2023)
 - Added Project on PyPI
 - Fixed Dependency Errors
 - Revise README and Package Information
