@@ -1,5 +1,11 @@
 # Change Logs
 
+### v0.1.3 - First Push (23 June 2023)
+- Added Project on PyPI
+- Fixed Dependency Errors
+- Revise README and Package Information
+
+
 ### v0.1.0 - First Push (23 June 2023)
 
 - Initial Idea of the Jam Engine

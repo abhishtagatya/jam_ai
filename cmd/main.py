@@ -15,7 +15,7 @@ def main():
 
     # Welcome message
     panel_text = """
-    🍓 Jamming AI Agents to Collaborate. \nhttps://github.com/abhishtagatya/jam
+    🍓 Create a Jam Session with AI.\nhttps://github.com/abhishtagatya/jam
     """
     panel = Panel(
         Text(panel_text, justify='center', style='grey100'),

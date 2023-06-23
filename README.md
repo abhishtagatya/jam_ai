@@ -1,12 +1,12 @@
-# Jam (AI)
+# Jam.AI
 
 > Create Jam session with AI
 
-Jam is an experimental collaboration tool to use multiple agents together equipped with instructed function calls.
+Jam is an experimental collaboration tool to use multiple AI personnel together equipped with instructed function calls.
 
-[View Changelog](CHANGELOG.md)
+[View Changelog](https://github.com/abhishtagatya/jam/blob/master/CHANGELOG.md)
 
-![Demo](docs/demo.png)
+![Demo](https://raw.githubusercontent.com/abhishtagatya/jam/master/docs/demo.png)
 
 ## Quick Start
 
