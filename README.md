@@ -34,6 +34,13 @@ prompt = jam_room.compose(
 
 ```
 
+Don't forget to use your credentials. Primarily for OpenAI, the core engine of this project. 
+https://platform.openai.com/account/api-keys
+
+```bash
+export OPENAI_KEY=YOUR_KEY
+```
+
 ## Installation
 
 ```bash
@@ -49,6 +56,17 @@ Extra Requirements for Function Calls
 * Requests
 * Stability SDK
 * Pillow
+
+### Extension
+
+For the use of other libraries, please consider to always feed in your API Keys respectively. See below for example.
+
+```bash
+export STABILITY_KEY=YOUR_STABILITY_AI_KEY # If you are using Stability SDK
+export WRITESONIC_KEY=YOUR_WRITE_SONIC_KEY # If you are using WriteSonic API
+export CUSTOM_KEY=YOUR_CUSTOM_KEY          # If there are any other added functionalities
+```
+
 
 ## Author
 * Abhishta Gatya ([Email](mailto:abhishtagatya@yahoo.com)) - Software and Machine Learning Engineer

@@ -1,6 +1,13 @@
 # Change Logs
 
-### v0.1.6 - Added WriteSonic and Bug Fixes
+### v0.1.7 - Added Persistence Clear and Error Management (25 June 2023)
+- Added 'clear' method for BasePersistence
+- Added 'clear' method for MemoryPersistence
+- Added 'clear' method for SQLitePersistence
+- Added Error Management for Unfulfilled Credential
+- Minor Bug Fixes
+
+### v0.1.6 - Added WriteSonic and Bug Fixes (24 June 2023)
 - Added WriteSonic (PhotoSonic) API in Interface
 - Added Unit Test for Interface
 - Bug Fixing and Cleanups on Interface Classes
@@ -9,7 +16,6 @@
 - Added Project on PyPI
 - Fixed Dependency Errors
 - Revise README and Package Information
-
 
 ### v0.1.0 - First Push (23 June 2023)
 

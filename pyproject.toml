@@ -4,12 +4,12 @@ build-backend = "hatchling.build"
 
 [project]
 name = "jam-ai"
-version = "0.1.6"
+version = "0.1.7"
 version_pattern = "MAJOR.MINOR.PATCH"
 authors = [
   { name="Abhishta Gatya", email="abhishtagatya@yahoo.com" },
 ]
-description = "Experimental collaboration tool to use multiple AI personnel together equipped with instructed function calls."
+description = "Engaging with Multiple AI Agents with Jam."
 keywords = ["openai", "multi agent", "chat engine", "collaboration", "machine learning", "data science"]
 readme = "README.md"
 license = { file="LICENSE" }
