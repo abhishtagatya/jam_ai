@@ -6,7 +6,7 @@ import openai
 import requests
 from PIL import Image
 
-from jam.interface.base import BaseInterface, JIOutput
+from jam.interface.base import BaseInterface, JIOutput, JIError
 from jam.util.generate import generate_id
 
 warnings.filterwarnings('ignore')
@@ -19,6 +19,9 @@ class OpenAIBase(BaseInterface):
         self._token = token
         if self._token is None:
             self._token = os.getenv('OPENAI_KEY', '')
+
+        if self._token == '':
+            raise JIError(f"Unfulfilled credentials for {self.__class__.__name__} in parameters or environment.")
 
         openai.api_key = self._token
         self.open_ai = openai

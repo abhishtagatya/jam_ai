@@ -2,7 +2,7 @@ import json
 import os
 from typing import AnyStr, Tuple
 
-from jam.interface.base import BaseInterface, JIOutput
+from jam.interface.base import BaseInterface, JIOutput, JIError
 from jam.util.generate import generate_id
 
 import requests
@@ -20,6 +20,9 @@ class WriteSonicBase(BaseInterface):
         self._api_key = api_key
         if self._api_key is None:
             self._api_key = os.getenv('WRITESONIC_KEY', '')
+
+        if self._api_key == '':
+            raise JIError(f"Unfulfilled credentials for {self.__class__.__name__} in parameters or environment.")
 
         self.headers = {
             "accept": "application/json",

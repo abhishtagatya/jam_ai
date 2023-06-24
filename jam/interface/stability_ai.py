@@ -3,7 +3,7 @@ import io
 import warnings
 from typing import AnyStr, Tuple
 
-from jam.interface.base import BaseInterface, JIOutput
+from jam.interface.base import BaseInterface, JIOutput, JIError
 
 from PIL import Image
 from stability_sdk import client
@@ -32,6 +32,9 @@ class StabilityAIBase(BaseInterface):
         self._host = host
         if self._host is None:
             self._host = os.getenv('STABILITY_HOST', '')
+
+        if self._api_key == '':
+            raise JIError(f"Unfulfilled credentials for {self.__class__.__name__} in parameters or environment.")
 
         self.verbose = verbose
         self.stability_api = client.StabilityInference(

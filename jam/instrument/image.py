@@ -4,7 +4,6 @@ from jam.instrument.base import BaseInstrument, BaseParameter, BaseProperty
 from jam.interface.base import BaseInterface
 from jam.interface.openai import OpenAIImageGen
 
-_OpenAIImageGen = OpenAIImageGen()
 _PromptPainterPromptProperty = BaseProperty(
     name='prompt', description='The text prompt to generate the image'
 )
@@ -20,8 +19,10 @@ class PromptPainter(BaseInstrument):
                  name: str = 'prompt_painter',
                  description: str = 'Generates image from text prompt',
                  parameters: Union[BaseParameter, Dict] = _PromptPainterParameters,
-                 interface: BaseInterface = _OpenAIImageGen):
+                 interface: BaseInterface = None):
         super().__init__(name, description, parameters, interface)
+        if self.interface is None:
+            self.interface = OpenAIImageGen()
 
     def activate(self, prompt: AnyStr = None):
         if prompt is None:

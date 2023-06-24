@@ -1,6 +1,12 @@
 from typing import Any, AnyStr
 
 
+class JIError(Exception):
+
+    def __init__(self, message: str):
+        self.message = message
+
+
 class JIOutput(object):
     JIO_TEXT = 'text'
     JIO_IMAGE = 'image'
