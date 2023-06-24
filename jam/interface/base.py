@@ -15,6 +15,9 @@ class JIOutput(object):
         self.function = function
         self.success = success
 
+    def __repr__(self):
+        return f'<JIOutput output:{self.output}, function:{self.function}, success:{self.success}>'
+
 
 class BaseInterface(object):
 

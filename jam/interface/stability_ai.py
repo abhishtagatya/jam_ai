@@ -57,7 +57,7 @@ class StabilityText2Image(StabilityAIBase):
                  verbose: bool = True):
         super(StabilityText2Image, self).__init__(engine, api_key, host, verbose)
 
-    def call(self, x: AnyStr = None):
+    def call(self, x: AnyStr = None) -> JIOutput:
         filenames = []
         response = self.stability_api.generate(
             prompt=x,

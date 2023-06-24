@@ -87,11 +87,11 @@ class OpenAIImageGen(OpenAIBase):
         self.samples = samples
         self.width, self.height = dimension
 
-    def call(self, prompt: AnyStr = None) -> JIOutput:
+    def call(self, x: AnyStr = None) -> JIOutput:
         try:
             filenames = []
             response = openai.Image.create(
-                prompt=prompt,
+                prompt=x,
                 n=self.samples,
                 size=f'{self.width}x{self.height}'
             )
