@@ -129,7 +129,7 @@ class BasePersonnel(object):
         return f_name, f_response
 
     @classmethod
-    def get_template(cls, filepath: str = 'new-agent.json'):
+    def get_template(cls, filepath: str = 'new-personnel.json'):
         filename, file_extension = os.path.splitext(filepath)
         if file_extension == '.json':
             with open(filepath, 'w') as f:
