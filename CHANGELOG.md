@@ -1,5 +1,10 @@
 # Change Logs
 
+### v0.1.6 - Added WriteSonic and Bug Fixes
+- Added WriteSonic (PhotoSonic) API in Interface
+- Added Unit Test for Interface
+- Bug Fixing and Cleanups on Interface Classes
+
 ### v0.1.5 - Fix Dependency (23 June 2023)
 - Added Project on PyPI
 - Fixed Dependency Errors
