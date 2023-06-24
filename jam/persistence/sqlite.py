@@ -94,4 +94,19 @@ class SQLitePersistence(BasePersistence):
             result = session.query(ConversationHistory).count()
             return result
 
+    def clear(self, key: str = None, value: List[str] = None):
+        with Session(self.db) as session:
+            if key is None or value is None:
+                session.query(ConversationHistory).delete()
+                session.commit()
+                return
+
+            filter_conditions = [getattr(ConversationHistory, key) == val for val in value]
+            filter_conditions = or_(*filter_conditions)
+
+            session.query(ConversationHistory).filter(filter_conditions).delete()
+            session.commit()
+            return
+
+
 

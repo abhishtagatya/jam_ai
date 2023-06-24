@@ -23,15 +23,19 @@ class DoubleLinkedList:
 
     def append(self, data: PersistenceObject):
         new_node = Node(data)
-        if self.head is None:
+        if not self.head:
             self.head = new_node
             self.tail = new_node
         else:
-            current = self.head
-            while current.next:
-                current = current.next
+            # current = self.head
+            # while current.next:
+            #     current = current.next
+            # current.next = new_node
+            # new_node.prev = current
+            # self.tail = new_node
+            current = self.tail
             current.next = new_node
-            new_node.prev = current
+            new_node.prev = self.tail
             self.tail = new_node
         self.length += 1
 
@@ -54,6 +58,27 @@ class DoubleLinkedList:
             result.append(current.data)
             current = current.prev
         return result
+
+    def clear(self, key: str = None, value: List[str] = None):
+        if key is None or value is None:
+            self.head = self.tail = None
+            self.length = 0
+        else:
+            current = self.tail
+            while current:
+                if current.data.__dict__[key] in value:
+                    if current.prev:
+                        current.prev.next = current.next
+                    else:
+                        self.head = current.next
+
+                    if current.next:
+                        current.next.prev = current.prev
+                    else:
+                        self.tail = current.prev
+                    self.length -= 1
+
+                current = current.prev
 
 
 class MemoryPersistence(BasePersistence):
@@ -98,3 +123,8 @@ class MemoryPersistence(BasePersistence):
 
     def count(self):
         return self.db.length
+
+    def clear(self, key: str = None, value: List[str] = None):
+        self.db.clear(key=key, value=value)
+        return
+

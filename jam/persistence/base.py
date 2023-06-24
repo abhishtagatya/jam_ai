@@ -20,6 +20,12 @@ class BasePersistence(object):
     def all(self):
         return []
 
+    def count(self):
+        return 0
+
+    def clear(self):
+        return
+
 
 class PersistenceObject:
 
@@ -49,4 +55,4 @@ class PersistenceObject:
         }
 
     def __repr__(self):
-        return f'<PersistenceObject (author={self.author}, content={self.content})'
+        return f'<PersistenceObject (author={self.author}, content={self.content}, mention={self.mention})'
