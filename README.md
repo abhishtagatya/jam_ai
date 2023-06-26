@@ -14,17 +14,13 @@ Jam is an experimental collaboration tool to use multiple AI personnel together 
 from jam import Jam
 from jam.personnel import BasicPersonnel
 from jam.instrument import PromptPainter
-from jam.persistence import SQLitePersistence
 
 jam_room = Jam(
     members=[
-        BasicPersonnel.from_json('example/personnel/albert-einstein.json'),
-        BasicPersonnel.from_json('example/personnel/stephen-hawking.json')
+        BasicPersonnel.from_json('albert-einstein.json'),
+        BasicPersonnel.from_json('stephen-hawking.json')
     ],
-    instruments=[
-        PromptPainter()
-    ],
-    persistence=SQLitePersistence()
+    instruments=[PromptPainter()]
 )
 
 prompt = jam_room.compose(
@@ -51,11 +47,12 @@ You need to use Pip to install jam. Conda package is currently unavailable.
 ### Requirements
 * Python >= 3.8
 * OpenAI
+* Requests
+* Pillow
 
 Extra Requirements for Function Calls
-* Requests
+* Psycopg2
 * Stability SDK
-* Pillow
 
 ### Extension
 
