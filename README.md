@@ -52,6 +52,7 @@ You need to use Pip to install jam. Conda package is currently unavailable.
 
 Extra Requirements for Function Calls
 * Psycopg2
+* PyMySQL
 * Stability SDK
 
 ### Extension

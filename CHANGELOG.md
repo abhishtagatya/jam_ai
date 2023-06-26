@@ -1,5 +1,12 @@
 # Change Logs
 
+### v0.1.8 - Added Postgres and MySQL Persistence (26 June 2023)
+- Added Postgres Persistence
+- Added MySQL Persistence
+- Added Unit Test for Persistence
+- Revise Unit Test for Interface
+- Minor Bug Fixes
+
 ### v0.1.7 - Added Persistence Clear and Error Management (25 June 2023)
 - Added 'clear' method for BasePersistence
 - Added 'clear' method for MemoryPersistence
