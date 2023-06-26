@@ -1,5 +1,5 @@
 from datetime import datetime
-from typing import Dict, AnyStr
+from typing import Dict, AnyStr, List
 
 
 class BasePersistence(object):
@@ -11,8 +11,14 @@ class BasePersistence(object):
     def transform(data: Dict) -> Dict:
         return {}
 
-    def save(self, role: str, author: str, content: str):
-        pass
+    def save(self,
+             role: str,
+             author: str,
+             content: str,
+             mentions: List[str] = None,
+             function: str = None,
+             success: bool = True):
+        return []
 
     def find(self, key: str, value: str = None, limit: int = 5):
         return []

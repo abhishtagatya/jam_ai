@@ -42,7 +42,7 @@ class TestJIOutput(unittest.TestCase):
         pass
 
 
-class BaseInterfaceAlter(BaseInterface):
+class AlterInterface(BaseInterface):
 
     def call(self, x: AnyStr = None) -> JIOutput:
         return JIOutput(output=x, success=False)
@@ -52,7 +52,7 @@ class TestBaseInterface(unittest.TestCase):
 
     def setUp(self) -> None:
         self.bi_1 = BaseInterface()
-        self.bi_2 = BaseInterface()
+        self.bi_2 = AlterInterface()
 
     def test_class_identity(self):
         self.assertIsInstance(self.bi_1, BaseInterface)
@@ -68,10 +68,10 @@ class TestBaseInterface(unittest.TestCase):
         self.assertEqual(bi_1_call.function, None)
         self.assertEqual(bi_1_call.success, True)
 
-        bi_2_call = self.bi_2.call()
+        bi_2_call = self.bi_2.call(x='Hello')
         self.assertEqual(bi_2_call.out_type, JIOutput.JIO_TEXT)
-        self.assertEqual(bi_2_call.output, '')
+        self.assertEqual(bi_2_call.output, 'Hello')
         self.assertEqual(bi_2_call.function, None)
-        self.assertEqual(bi_2_call.success, True)
+        self.assertEqual(bi_2_call.success, False)
 
 
