@@ -60,5 +60,6 @@ class Jam(BaseJam):
         result = self.persistence.all()
         return result
 
-    def clear(self):
+    def clear(self, key: str = None,  value: List[str] = None):
+        self.persistence.clear(key, value)
         return
