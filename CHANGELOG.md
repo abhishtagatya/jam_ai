@@ -1,6 +1,6 @@
 # Change Logs
 
-### v0.1.10 - Split Dependencies to Extras
+### v0.1.11 - Split Dependencies to Extras
 - Added extra packaging for 'database' and 'function'
 - Added more characters (Claude Monet, Pablo Picasso, and Van Gogh)
 - Minor Bug Fixes
