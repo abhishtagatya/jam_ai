@@ -57,6 +57,13 @@ Extra Requirements for Function Calls
 
 ### Extension
 
+Optional dependencies to fit any requirement needed.
+
+```bash
+pip install jam-ai[database] # Using Postgres, MySQL, Redis ...
+pip install jam-ai[function] # Using Extended Function Calls requiring SDKs / Packages
+```
+
 For the use of other libraries, please consider to always feed in your API Keys respectively. See below for example.
 
 ```bash
