@@ -1,5 +1,10 @@
 # Change Logs
 
+### v0.1.9 - Split Dependencies to Extras
+- Added extra packaging for 'database' and 'function'
+- Added more characters (Claude Monet, Pablo Picasso, and Van Gogh)
+- Minor Bug Fixes
+
 ### v0.1.8 - Added Postgres and MySQL Persistence (26 June 2023)
 - Added Postgres Persistence
 - Added MySQL Persistence

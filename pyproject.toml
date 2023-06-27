@@ -4,7 +4,7 @@ build-backend = "hatchling.build"
 
 [project]
 name = "jam-ai"
-version = "0.1.8"
+version = "0.1.9"
 version_pattern = "MAJOR.MINOR.PATCH"
 authors = [
   { name="Abhishta Gatya", email="abhishtagatya@yahoo.com" },
@@ -59,6 +59,16 @@ include = [
   "/tests/*",
   "/example/*",
   "/cmd/*",
+]
+
+[tool.hatch.extras]
+database = [
+    'pymysql',
+    'psycopg2',
+]
+
+function = [
+    'stability-sdk',
 ]
 
 [project.urls]
