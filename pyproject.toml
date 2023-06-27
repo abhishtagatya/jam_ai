@@ -4,7 +4,7 @@ build-backend = "hatchling.build"
 
 [project]
 name = "jam-ai"
-version = "0.1.9"
+version = "0.1.10"
 version_pattern = "MAJOR.MINOR.PATCH"
 authors = [
   { name="Abhishta Gatya", email="abhishtagatya@yahoo.com" },
@@ -13,15 +13,12 @@ description = "Engaging with Multiple AI Agents with Jam."
 keywords = ["openai", "multi agent", "chat engine", "collaboration", "machine learning", "data science"]
 readme = "README.md"
 license = { file="LICENSE" }
-requires-python = ">=3.9"
+requires-python = ">=3.8"
 dependencies = [
     'openai',
     'Pillow',
     'requests',
     'SQLAlchemy',
-    'psycopg2',
-    'pymysql',
-    'stability-sdk',
     'rich',
 ]
 classifiers = [
@@ -42,8 +39,6 @@ classifiers = [
     'Topic :: Software Development :: Libraries',
     'Topic :: Software Development :: Libraries :: Python Modules',
 
-    'Programming Language :: Python :: 3.6',
-    'Programming Language :: Python :: 3.7',
     'Programming Language :: Python :: 3.8',
     'Programming Language :: Python :: 3.9',
     'Programming Language :: Python :: 3.10',
