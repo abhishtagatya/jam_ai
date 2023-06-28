@@ -9,6 +9,8 @@ from jam.persistence.base import PersistenceObject
 from jam.interface.openai import OpenAIChat
 from jam.util.generate import generate_id
 
+import requests
+
 
 class BasePersonnel(object):
     BASE_TEMPLATE = {
@@ -196,3 +198,22 @@ class BasePersonnel(object):
 
                 return cls.from_dict(data=config_json, mention_only=mention_only)
         raise ValueError(f'File {filepath} is not JSON. Please try another format.')
+
+    @classmethod
+    def from_url(cls, url: str = None, mention_only: bool = False):
+        if url is None:
+            raise ValueError(f'URL with value {url} is irretrievable.')
+
+        response = requests.get(url)
+        json_response = json.loads(response.text)
+
+        if response.status_code != 200:
+            raise ValueError(f'URL with value {url} is irretrievable. Got status {response.status_code}')
+        return cls.from_dict(data=json_response, mention_only=mention_only)
+
+    @classmethod
+    def from_preset(cls, name: str, format_url: str = None, mention_only: bool = False):
+        if format_url is None:
+            format_url = 'https://raw.githubusercontent.com/abhishtagatya/jam_ai/master/example/personnel/{name}.json'
+
+        return cls.from_url(url=format_url.format(name=name), mention_only=mention_only)
