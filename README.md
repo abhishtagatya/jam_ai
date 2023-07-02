@@ -1,8 +1,8 @@
 # Jam.AI
 
-> Create Jam session with AI
-
 Jam is an experimental collaboration tool to use multiple AI personnel together equipped with instructed function calls.
+
+> Create Jam session with AI
 
 [View Changelog](https://github.com/abhishtagatya/jam/blob/master/CHANGELOG.md)
 
@@ -12,21 +12,24 @@ Jam is an experimental collaboration tool to use multiple AI personnel together 
 
 ```python
 from jam import Jam
-from jam.personnel import BasicPersonnel
+from jam.personnel import BasicPersonnel, AutoPersonnel
 from jam.instrument import PromptPainter
 
 jam_room = Jam(
     members=[
-        BasicPersonnel.from_json('albert-einstein.json'),
-        BasicPersonnel.from_json('stephen-hawking.json')
+        BasicPersonnel.from_json(filepath='example/personnel/claude-monet.json'),  # Using custom JSON
+        BasicPersonnel.from_preset(name='pablo-picasso'),  # Using example presets from Git
+        AutoPersonnel.from_prompt(uid='wkandinsky', prompt='Wassily Kandinsky')  # Using GPT to build prompt
     ],
     instruments=[PromptPainter()]
 )
 
 prompt = jam_room.compose(
-    message='Give me a question',
+    message='who are you!',
     multi=True
 )
+
+print(prompt) # List of Prompts from Characters
 
 ```
 
