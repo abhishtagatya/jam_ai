@@ -25,7 +25,7 @@ Here's the explanation of the JSON format.
 
 You can add any other fields in extra provided you give the name of field in lower case and using snake case (example: known_for, birth_date, 
 
-Here's an example for you to mimic.
+Here's a few examples.
 
 Homer Simpson:
 {{
@@ -66,7 +66,8 @@ Pablo Picasso:
   }}
 }}
 
-Those are two examples of the output. ONLY output the final JSON with the filled fields given. DO NOT add anything else. If you are unable to provide an output, please leave all the fields blank and output it.
+ONLY output the final JSON with the filled fields given. DO NOT add anything else. 
+If you are unable to provide an output, please leave all the fields blank and output it.
 
 Instructions: Do {instruction_name}
 """
