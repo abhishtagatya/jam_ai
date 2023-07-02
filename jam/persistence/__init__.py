@@ -6,3 +6,5 @@ try:
     from jam.persistence.mysql import MySQLPersistence
 except ModuleNotFoundError as mn_err:
     pass
+except ImportError as imp_err:
+    pass

@@ -6,3 +6,5 @@ try:
     from jam.interface.stability_ai import StabilityText2Image
 except ModuleNotFoundError as mn_err:
     pass
+except ImportError as imp_err:
+    pass

@@ -1,6 +1,6 @@
 # Change Logs
 
-### v0.1.13 - Automatic Character Building
+### v0.1.14 - Automatic Character Building
 - Added AutoPersonnel class to auto build characters using GPT Complete.
 - Added save_json method on BasePersonnel to save the personnel's data as a JSON
 - Added OpenAIComplete for GPT Generate and Complete method
