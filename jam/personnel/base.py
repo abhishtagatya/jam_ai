@@ -130,6 +130,27 @@ class BasePersonnel(object):
 
         return f_name, f_response
 
+    def _retrieve_obj_const(self):
+        return {
+            'uid': self.uid,
+            'display_name': self.display_name,
+            'description': self.description,
+            'categories': self.categories,
+            'instruction': self.instruction,
+            'restriction': self.restriction,
+            'extra': self.extra
+        }
+
+    def save_json(self, filename: str = None):
+        if filename is None:
+            filename = self.uid + '.json'
+
+        obj_const = self._retrieve_obj_const()
+        with open(filename, 'w') as f_new:
+            json.dump(obj_const, f_new)
+
+        return self
+
     @classmethod
     def get_template(cls, filepath: str = 'new-personnel.json'):
         filename, file_extension = os.path.splitext(filepath)

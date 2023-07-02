@@ -78,6 +78,27 @@ class OpenAIChat(OpenAIBase):
         return msg_objs
 
 
+class OpenAIComplete(OpenAIBase):
+
+    DEFAULT_MODEL = 'text-davinci-003'
+
+    def __init__(self,
+                 token: str = None,
+                 model: str = DEFAULT_MODEL,
+                 max_tokens: int = 1000):
+        super(OpenAIComplete, self).__init__(token, model)
+        self.max_tokens = max_tokens
+
+    def call(self, x: AnyStr = None) -> JIOutput:
+        response = self.open_ai.Completion.create(
+            model=self.model,
+            prompt=x,
+            max_tokens=self.max_tokens
+        )
+        response_message = response['choices'][0]['text']
+        return JIOutput(output=response_message)
+
+
 class OpenAIImageGen(OpenAIBase):
 
     def __init__(self,
