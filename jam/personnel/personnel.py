@@ -23,7 +23,6 @@ class AutoPersonnel(BasePersonnel):
         try:
             response = OpenAIComplete().call(x_prompt)
             json_response = json.loads(response.output)
-            print(json_response)
 
             json_response['uid'] = uid.lower().replace(' ', '_')
             json_response['instruction'] = cls._generate_instruction_field(x_dict=json_response)
