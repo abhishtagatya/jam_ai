@@ -12,9 +12,24 @@ Base = declarative_base()
 
 
 class ConversationHistory(Base):
+    """
+    ConversationHistory:
+
+    - uid: Unique ID
+    - cid: Conversation ID
+    - author: Message Author
+    - role: Message Role
+    - content: Message Content
+    - mention: Mention Author
+    - function: Function Called
+    - timestamp: Message Timestamp
+    - success: Message Status
+    """
+
     __tablename__ = "conversation_history"
 
     uid: Mapped[str] = mapped_column(String(16), primary_key=True)
+    cid: Mapped[str] = mapped_column(String(32), nullable=True, default='main')
     author: Mapped[str] = mapped_column(String(32))
     role: Mapped[str] = mapped_column(String(32))
     content: Mapped[str] = mapped_column(Text)

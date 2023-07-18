@@ -46,7 +46,7 @@ class OpenAIChat(OpenAIBase):
 
     def call(self, messages: List[Dict] = None, functional: bool = True) -> JIOutput:
         x_message = self.form_message(messages)
-        if functional:
+        if functional and self.functions:
             response = self.open_ai.ChatCompletion.create(
                 model=self.model,
                 messages=x_message,

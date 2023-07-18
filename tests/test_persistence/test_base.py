@@ -12,6 +12,7 @@ class TestPersistenceObject(unittest.TestCase):
 
     def setUp(self) -> None:
         self.uid_1 = generate_id(16)
+        self.cid_1 = generate_id(16)
         self.author_1 = generate_id(8)
         self.role_1 = generate_id(8)
         self.content_1 = generate_id(8)
@@ -21,6 +22,7 @@ class TestPersistenceObject(unittest.TestCase):
         self.success_1 = True
 
         self.uid_2 = generate_id(16)
+        self.cid_2 = generate_id(16)
         self.author_2 = generate_id(8)
         self.role_2 = generate_id(8)
         self.content_2 = generate_id(8)
@@ -31,6 +33,7 @@ class TestPersistenceObject(unittest.TestCase):
 
         self.po_1 = PersistenceObject(
             uid=self.uid_1,
+            cid=self.cid_1,
             author=self.author_1,
             role=self.role_1,
             content=self.content_1,
@@ -42,6 +45,7 @@ class TestPersistenceObject(unittest.TestCase):
 
         self.po_2 = PersistenceObject(
             uid=self.uid_2,
+            cid=self.cid_2,
             author=self.author_2,
             role=self.role_2,
             content=self.content_2,
@@ -58,6 +62,10 @@ class TestPersistenceObject(unittest.TestCase):
     def test_class_attribute_uid(self):
         self.assertEqual(self.po_1.uid, self.uid_1)
         self.assertEqual(self.po_2.uid, self.uid_2)
+
+    def test_class_attribute_cid(self):
+        self.assertEqual(self.po_1.cid, self.cid_1)
+        self.assertEqual(self.po_2.cid, self.cid_2)
 
     def test_class_attribute_author(self):
         self.assertEqual(self.po_1.author, self.author_1)
@@ -107,6 +115,7 @@ class TestPersistenceObject(unittest.TestCase):
 class AlterPersistence(BasePersistence):
 
     def save(self,
+             cid: str,
              role: str,
              author: str,
              content: str,
@@ -120,6 +129,7 @@ class AlterPersistence(BasePersistence):
         for mention in mentions:
             data_obj = PersistenceObject(
                 uid=generate_id(16),
+                cid=cid,
                 role=role,
                 author=author,
                 content=content,
@@ -138,6 +148,7 @@ class TestBasePersistence(unittest.TestCase):
         self.per_1 = BasePersistence()
         self.per_2 = AlterPersistence()
 
+        self.cid_2 = generate_id(16)
         self.role_2 = generate_id(8)
         self.author_2 = generate_id(8)
         self.content_2 = generate_id(8)
@@ -145,6 +156,7 @@ class TestBasePersistence(unittest.TestCase):
         self.function_2 = generate_id(8)
 
         self.per_2_saved = self.per_2.save(
+            cid=self.cid_2,
             role=self.role_2,
             author=self.author_2,
             content=self.content_2,
@@ -155,6 +167,7 @@ class TestBasePersistence(unittest.TestCase):
         self.per_2_saved_mock = [
             PersistenceObject(
                 uid=generate_id(16),
+                cid=self.cid_2,
                 role=self.role_2,
                 author=self.author_2,
                 content=self.content_2,
@@ -170,10 +183,11 @@ class TestBasePersistence(unittest.TestCase):
 
     def test_class_method_save(self):
         self.assertEqual(self.per_1.save(
-            role='', author='', content=''
+            cid=self.cid_2, role='', author='', content=''
         ), [])
 
         self.assertEqual(len(self.per_2_saved), len(self.per_2_saved_mock))
+        self.assertEqual(self.per_2_saved[0].cid, self.per_2_saved_mock[0].cid)
         self.assertEqual(self.per_2_saved[0].role, self.per_2_saved_mock[0].role)
         self.assertEqual(self.per_2_saved[0].author, self.per_2_saved_mock[0].author)
         self.assertEqual(self.per_2_saved[0].content, self.per_2_saved_mock[0].content)

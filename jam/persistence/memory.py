@@ -1,5 +1,5 @@
 from datetime import datetime
-from typing import List, Optional
+from typing import List, Optional, Dict
 
 from jam.persistence.base import BasePersistence
 from jam.persistence.base import PersistenceObject
@@ -27,26 +27,24 @@ class DoubleLinkedList:
             self.head = new_node
             self.tail = new_node
         else:
-            # current = self.head
-            # while current.next:
-            #     current = current.next
-            # current.next = new_node
-            # new_node.prev = current
-            # self.tail = new_node
             current = self.tail
             current.next = new_node
             new_node.prev = self.tail
             self.tail = new_node
         self.length += 1
 
-    def find(self, key: str, value: List[str], limit: int = 5):
+    def find(self, conditions: Dict, limit: int = 5):
         result = []
         current = self.tail
         if current is None:
             return result
 
         while current is not None and len(result) < limit:
-            if current.data.__dict__[key] in value and current.data.mention in value:
+            key_flag = 0
+            for key, value in conditions.items():
+                if current.data.__dict__[key] in value:
+                    key_flag += 1
+            if key_flag >= len(conditions):
                 result.insert(0, current.data)
             current = current.prev
         return result
@@ -88,6 +86,7 @@ class MemoryPersistence(BasePersistence):
         self.db: DoubleLinkedList = DoubleLinkedList()
 
     def save(self,
+             cid: str,
              role: str,
              author: str,
              content: str,
@@ -101,6 +100,7 @@ class MemoryPersistence(BasePersistence):
         for mention in mentions:
             data_obj = PersistenceObject(
                 uid=generate_id(16),
+                cid=cid,
                 role=role,
                 author=author,
                 content=content,
@@ -113,8 +113,8 @@ class MemoryPersistence(BasePersistence):
             saved_objs.append(data_obj)
         return saved_objs
 
-    def find(self, key: str, value: List[str] = None, limit: int = 5):
-        result = self.db.find(key, value, limit)
+    def find(self, conditions: Dict, limit: int = 5):
+        result = self.db.find(conditions, limit)
         return result
 
     def all(self):

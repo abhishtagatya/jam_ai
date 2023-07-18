@@ -26,21 +26,8 @@ class MySQLPersistence(BasePersistence):
         if not self.db.dialect.has_table(self.db.connect(), 'conversation_history'):
             Base.metadata.create_all(self.db)
 
-    @staticmethod
-    def transform(data: ConversationHistory) -> PersistenceObject:
-        data_obj = PersistenceObject(
-            uid=data.uid,
-            role=data.role,
-            author=data.author,
-            content=data.content,
-            mention=data.mention,
-            function=data.function,
-            timestamp=data.timestamp,
-            success=data.success
-        )
-        return data_obj
-
     def save(self,
+             cid: str,
              role: str,
              author: str,
              content: str,
@@ -55,6 +42,7 @@ class MySQLPersistence(BasePersistence):
             for mention in mentions:
                 conv_history = ConversationHistory(
                     uid=generate_id(16),
+                    cid=cid,
                     role=role,
                     author=author,
                     content=content,
@@ -68,15 +56,14 @@ class MySQLPersistence(BasePersistence):
 
             return list(map(self.transform, saved_objs))
 
-    def find(self, key: str, value: List[str] = None, limit: int = 5):
+    def find(self, conditions: Dict, limit: int = 5):
         with Session(self.db) as session:
-            key_conditions = [getattr(ConversationHistory, key) == val for val in value]
-            key_conditions = or_(*key_conditions)
-
-            mention_conditions = [getattr(ConversationHistory, 'mention') == val for val in value]
-            mention_conditions = or_(*mention_conditions)
-
-            filter_conditions = and_(key_conditions, mention_conditions)
+            filter_conditions = []
+            for key, value in conditions.items():
+                temp_conditions = [getattr(ConversationHistory, key) == val for val in value]
+                temp_conditions = or_(*temp_conditions)
+                filter_conditions.append(temp_conditions)
+            filter_conditions = and_(*filter_conditions)
 
             result = session.query(
                 ConversationHistory

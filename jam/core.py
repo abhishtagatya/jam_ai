@@ -1,5 +1,5 @@
 from multiprocessing.pool import ThreadPool
-from typing import List, Optional
+from typing import List, Optional, AnyStr
 
 from jam.base import BaseJam
 from jam.version import version
@@ -10,7 +10,6 @@ from jam.util.search import search_mention
 
 
 class Jam(BaseJam):
-
     __version__ = version
 
     def __init__(self,
@@ -25,8 +24,8 @@ class Jam(BaseJam):
         mention_filter = [member for member in members if member.uid in search_mention(message)]
         return mention_filter
 
-    def _assign(self, member: BasePersonnel, message: str):
-        call_output = member.call(message)
+    def _assign(self, member: BasePersonnel, cid: AnyStr = 'main'):
+        call_output = member.call(cid=cid)
         self.cache_output += call_output
         return
 
@@ -34,32 +33,33 @@ class Jam(BaseJam):
         self._assign(*args)
         return
 
-    def compose(self, message: str, multi=True):
+    def compose(self, message: str, multi: bool = True, cid: AnyStr = 'main'):
         self.cache_output = []
 
         prompt_member = self._mention_filter(
             message, self.members
         ) or [member for member in self.members if not member.mention_only]
         self.persistence.save(
+            cid=cid,
             role='user',
             author='user',
             content=message,
-            mentions=[member.uid for member in prompt_member]
+            mentions=[member.uid for member in prompt_member],
         )
 
         if multi:
-            tasks = [(member, message) for member in prompt_member]
+            tasks = [(member, cid) for member in prompt_member]
             with ThreadPool() as pool:
                 pool.map(self._multi_assign, tasks)
         else:
             for member in prompt_member:
-                self._assign(member, message)
+                self._assign(member, cid)
         return self.cache_output
 
     def history(self):
         result = self.persistence.all()
         return result
 
-    def clear(self, key: str = None,  value: List[str] = None):
+    def clear(self, key: str = None, value: List[str] = None):
         self.persistence.clear(key, value)
         return

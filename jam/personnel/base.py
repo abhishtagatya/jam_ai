@@ -1,7 +1,7 @@
 import os
 import json
 import pathlib
-from typing import List, Dict, Any
+from typing import List, Dict, Any, AnyStr
 
 from jam.instrument.base import BaseInstrument
 from jam.persistence.base import BasePersistence
@@ -61,20 +61,26 @@ class BasePersonnel(object):
     def _structure_function_map(self):
         return {func.name: func.activate for func in self.instruments}
 
-    def _retrieve_history(self):
-        a = (self.persistence.find('author', [self.uid, 'user']))
-        return list(map(PersistenceObject.as_message, a))
+    def _retrieve_history(self, cid: AnyStr = 'main'):
+        conv_hist = (self.persistence.find(conditions={
+            'author': [self.uid, 'user'],
+            'mention': [self.uid, 'user'],
+            'cid': [cid]
+        }))
+        return list(map(PersistenceObject.as_message, conv_hist))
 
-    def _retrieve_context(self):
-        return [{'author': 'system', 'role': 'system', 'content': self.prompt}] + self._retrieve_history()
+    def _retrieve_context(self, cid: AnyStr = 'main'):
+        return [{'author': 'system', 'role': 'system', 'content': self.prompt}] + self._retrieve_history(cid=cid)
 
     def _save_message(self,
+                      cid: str,
                       role: str,
                       author: str,
                       content: str,
                       function: str = None,
                       success: bool = True) -> PersistenceObject:
         return self.persistence.save(
+            cid=cid,
             role=role,
             author=author,
             content=content,
@@ -82,10 +88,10 @@ class BasePersonnel(object):
             success=success
         )
 
-    def call(self, x: Any, functional: bool = True) -> List[PersistenceObject]:
+    def call(self, cid: AnyStr = 'main', functional: bool = True) -> List[PersistenceObject]:
         po_outputs = []
 
-        ctx_chain = self._retrieve_context()
+        ctx_chain = self._retrieve_context(cid=cid)
         response = self.engine.call(messages=ctx_chain, functional=functional)
 
         if response.output.get('function_call'):
@@ -93,9 +99,10 @@ class BasePersonnel(object):
 
             if f_response.success:
                 f_chain = [{'role': 'function', 'content': str(f_response.output), 'name': str(f_name)}]
-                ctx_chain = self._retrieve_context() + f_chain
+                ctx_chain = self._retrieve_context(cid=cid) + f_chain
                 after_response = self.engine.call(messages=ctx_chain, functional=False)
                 saved_response = self._save_message(
+                    cid=cid,
                     role='assistant',
                     author=self.uid,
                     content=after_response.output['content'],
@@ -104,6 +111,7 @@ class BasePersonnel(object):
                 po_outputs += saved_response
 
                 function_response = self._save_message(
+                    cid=cid,
                     role='function',
                     author=self.uid,
                     content=f_response.output,
@@ -113,6 +121,7 @@ class BasePersonnel(object):
                 po_outputs += function_response
         else:
             saved_response = self._save_message(
+                cid=cid,
                 role='assistant',
                 author=self.uid,
                 content=response.output['content'],
@@ -184,7 +193,6 @@ class BasePersonnel(object):
         """
         Load Character from Dict
 
-        :param instruments:
         :param mention_only:
         :param data: Dict
         :return: Instance
