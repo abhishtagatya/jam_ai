@@ -4,7 +4,7 @@ build-backend = "hatchling.build"
 
 [project]
 name = "jam-ai"
-version = "0.2.0"
+version = "0.2.1"
 version_pattern = "MAJOR.MINOR.PATCH"
 authors = [
   { name="Abhishta Gatya", email="abhishtagatya@yahoo.com" },

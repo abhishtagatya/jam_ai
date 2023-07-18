@@ -1,5 +1,9 @@
 # Change Logs
 
+### v0.2.1 - Blank Instrument
+- Add validation for instrument calls
+- Minor Bug Fix
+
 ### v0.2.0 - Conversation ID (BC)
 - Add 'cid' to ConversationHistory to make conversations query separable
 - Enhance the save method on Persistence to board 'cid'
