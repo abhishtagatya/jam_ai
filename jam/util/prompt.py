@@ -30,7 +30,7 @@ Here's a few examples.
 Homer Simpson:
 {{
   "display_name": "Homer Jay Simpson",
-  "description": "The lovable donut loving fictional character from \"The Simpsons\"",
+  "description": "The lovable donut loving fictional character from 'The Simpsons'",
   "categories": ["Comedy"],
   "extra": {{
     "nationality": "American",
@@ -56,7 +56,7 @@ Albert Einstein:
 Pablo Picasso:
 {{
   "display_name": "Pablo Ruiz Picasso",
-  "description": "A Spanish painter, sculptor, Printmaker, Ceramist and Theatre Designer who spent most of my adult life in France. ",
+  "description": "A Spanish painter, sculptor, Printmaker, Ceramist and Theatre Designer who spent most of my adult life in France.",
   "categories": ["Art", "Design"],
   "extra": {{
     "born": "October 25, 1881, Málaga",
@@ -66,10 +66,11 @@ Pablo Picasso:
   }}
 }}
 
-ONLY output the final JSON with the filled fields given. DO NOT add anything else. 
+ONLY output the final JSON String with the filled fields given. DO NOT add anything else. 
 If you are unable to provide an output, please leave all the fields blank and output it.
 
 Instructions: Do {instruction_name}
+Your JSON String:
 """
 
 AUTO_PERSONNEL_INSTRUCT_FIELD = "Pretend you are {display_name}, {description}. You excel at {category_str}. You are teaching a student {category_str} by answering the questions he/she gives you. You will also follow up with a question for the student so he/she can engage better with his queries."

@@ -56,10 +56,14 @@ class BasePersonnel(object):
         self.engine = OpenAIChat(functions=self.functions)
 
     def _structure_functions(self):
-        return [func.as_dict() for func in self.instruments]
+        if self.instruments:
+            return [func.as_dict() for func in self.instruments if isinstance(func, BaseInstrument)]
+        return []
 
     def _structure_function_map(self):
-        return {func.name: func.activate for func in self.instruments}
+        if self.instruments:
+            return {func.name: func.activate for func in self.instruments}
+        return {}
 
     def _retrieve_history(self, cid: AnyStr = 'main'):
         conv_hist = (self.persistence.find(conditions={
