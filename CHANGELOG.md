@@ -1,5 +1,12 @@
 # Change Logs
 
+### v0.2.0 - Conversation ID (BC)
+- Add 'cid' to ConversationHistory to make conversations query separable
+- Enhance the save method on Persistence to board 'cid'
+- Enhance the find method on Persistence to board 'cid'
+- Fix on empty function calls for OpenAIChat
+- Minor Bug Fixing
+
 ### v0.1.14 - Automatic Character Building
 - Added AutoPersonnel class to auto build characters using GPT Complete.
 - Added save_json method on BasePersonnel to save the personnel's data as a JSON
@@ -11,31 +18,31 @@
 - Added more characters (Claude Monet, Pablo Picasso, and Van Gogh)
 - Minor Bug Fixes
 
-### v0.1.8 - Added Postgres and MySQL Persistence (26 June 2023)
+### v0.1.8 - Added Postgres and MySQL Persistence
 - Added Postgres Persistence
 - Added MySQL Persistence
 - Added Unit Test for Persistence
 - Revise Unit Test for Interface
 - Minor Bug Fixes
 
-### v0.1.7 - Added Persistence Clear and Error Management (25 June 2023)
+### v0.1.7 - Added Persistence Clear and Error Management
 - Added 'clear' method for BasePersistence
 - Added 'clear' method for MemoryPersistence
 - Added 'clear' method for SQLitePersistence
 - Added Error Management for Unfulfilled Credential
 - Minor Bug Fixes
 
-### v0.1.6 - Added WriteSonic and Bug Fixes (24 June 2023)
+### v0.1.6 - Added WriteSonic and Bug Fixes
 - Added WriteSonic (PhotoSonic) API in Interface
 - Added Unit Test for Interface
 - Bug Fixing and Cleanups on Interface Classes
 
-### v0.1.5 - Fix Dependency (23 June 2023)
+### v0.1.5 - Fix Dependency
 - Added Project on PyPI
 - Fixed Dependency Errors
 - Revise README and Package Information
 
-### v0.1.0 - First Push (23 June 2023)
+### v0.1.0 - First Push
 
 - Initial Idea of the Jam Engine
 - Initial Idea of the Instrument as Function Calls
